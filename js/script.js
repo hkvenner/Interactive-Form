@@ -146,8 +146,22 @@ payment.addEventListener("change", (e) => {
 
 //Validating the name
 
-function validateName(){ 
+const name = document.getElementById("name");
+const fieldset = document.querySelector("fieldset");
+const span = document.createElement("span");
 
+function validName() { 
+    //console.log("this is the length of the value entered: " + name.value.length);
+    if (name.value.length == 0){
+        span.innerText = "Name must be at least 1 character long";
+        span.style.color = "red";
+        fieldset.insertBefore(span, name);
+        return false;
+    } 
+    else {
+        span.innerText = "";
+        return true;
+    }
 }
 
 function validateEmail(){
@@ -171,4 +185,15 @@ function validateCVV() {
 }
 
 
+// Master Validation Function - calls all the validation functions above
+const button = document.querySelector("button");
 
+button.addEventListener("click", (e) => {
+    //try if invalid then e.preventDefault but if not then let things go through
+    e.preventDefault();
+    validName();
+    // let isValid = validName();
+    // if(!isValid) {
+    //     alert("name too short");
+    // }
+});
